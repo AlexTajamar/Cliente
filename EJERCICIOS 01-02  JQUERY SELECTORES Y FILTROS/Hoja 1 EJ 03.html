@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>HOJA 1 Ejercicio 3</title>
-<style type="text/css">
-	li {font-family:Verdana,sans-serif;
-		font-size:12pt;
-		color:orange} 
-</style>
+	<meta charset="UTF-8">
+	<title>HOJA 1 Ejercicio 3</title>
+	<style type="text/css">
+		li {
+			font-family: Verdana, sans-serif;
+			font-size: 12pt;
+			color: orange
+		}
+	</style>
 </head>
+<script src=".\jquery-3.7.1.min.js"> </script>
+<script>
+	$(document).ready(function () {
+		$('li').click(function () {
+			$(this).hide(500);
+		});
+	});
+</script>
+
 <body>
-<ul>
-<li>Opción 1</li>
-<li>Opción 2</li>
-<li>Opción 3</li>
-<li>Opción 4</li>
-</ul>
+	<ul>
+		<li>Opción 1</li>
+		<li>Opción 2</li>
+		<li>Opción 3</li>
+		<li>Opción 4</li>
+	</ul>
 </body>
+
 </html>
