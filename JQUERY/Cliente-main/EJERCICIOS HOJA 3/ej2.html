@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style type="text/css">
+      body {
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+      #div {
+        width: 400px;
+        height: 400px;
+        margin-left: 20px;
+        border: 2px black solid;
+        padding: 20px;
+        background-color: #99ccff;
+      }
+      table {
+        background-color: #eff2fb;
+        text-align: center;
+        width: 250px;
+        border: 1px solid #d0a9f5;
+      }
+      td {
+        border: 1px solid #d0a9f5;
+        padding: 10px;
+        cursor: pointer;
+      }
+      .selected {
+        background-color: #d0a9f5;
+      }
+      input {
+        text-align: center;
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        // Genera número aleatorio entre min y max
+        function aleatorio(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Generar número objetivo
+        const numeroObjetivo = aleatorio(1, 100);
+        $("#num").val(numeroObjetivo);
+
+        // Generar números en la tabla
+        $("td").each(function () {
+          $(this).text(aleatorio(1, 9));
+        });
+
+        // Variable para la suma
+        let sumaTotal = 0;
+
+        // Click en las celdas
+        $("td").click(function () {
+          // Si ya está seleccionada o es un asterisco, no hacer nada
+          if ($(this).hasClass("selected") || $(this).text() === "*") {
+            return;
+          }
+
+          // Sumar el número
+          const numero = parseInt($(this).text());
+          sumaTotal += numero;
+
+          // Actualizar suma mostrada
+          $("#suma").val(sumaTotal);
+
+          // Marcar celda como seleccionada
+          $(this).addClass("selected");
+
+          // Comprobar resultado
+          if (sumaTotal === numeroObjetivo) {
+            alert("¡Felicidades! Has conseguido la suma exacta.");
+            terminarJuego();
+          } else if (sumaTotal > numeroObjetivo) {
+            alert("Te has pasado del número objetivo.");
+            terminarJuego();
+          }
+        });
+
+        function terminarJuego() {
+          // Cambiar celdas no seleccionadas por asteriscos
+          $("td:not(.selected)").text("*");
+          // Desactivar clicks
+          $("td").off("click");
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="div">
+      <br /><br />
+      TIENES QUE SUMAR
+      <input type="text" id="num" size="6" value="0" disabled /> <br /><br />
+      Y LLEVAS SUMADO
+      <input type="text" id="suma" size="6" value="0" disabled />
+      <br /><br />
+      <table>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
