@@ -1,0 +1,251 @@
+
+
+Ir al contenido
+Uso de Correo de Colegio Nuestra Señora del Pilar con lectores de pantalla
+
+
+Conversaciones
+
+ 
+Política del programa
+Con la tecnología de Google
+Última actividad de la cuenta: hace 21 horas
+Detalles
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EXAMEN EJERCICIO 1</title>
+    <link rel="stylesheet" type="text/css" href="stylepoli.css">
+    <style type="text/css">
+        body {
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            color: #210B61;
+            font-size: 10pt;
+        }
+
+        div {
+            width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #central, #abajo {
+            text-align: center;
+        }
+
+        #pos1 {
+            position: relative;
+            background-color: #F5DA81;
+        }
+
+        table {
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center;
+        }
+
+        td {
+            font-size: 12px;
+            width: 200px;
+            height: 50px;
+            text-align: center;
+            border: 1px solid black;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        .seleccionada {
+            background-color: #66cc66;
+        }
+    </style>
+
+    <script>
+        let tarifa = 0;
+        function calcularprecio() {
+            const diaInput = document.getElementById("dd");
+            const mesInput = document.getElementById("mm");
+            const añoInput = document.getElementById("aaaa");
+            const familiaNumerosa = document.querySelector('input[name="familiaNumerosa"]:checked').value;
+            const empadronado = document.querySelector('input[name="empadronado"]:checked').value;
+
+            const dia = Number(diaInput.value);
+            const mes = Number(mesInput.value);
+            const año = Number(añoInput.value);
+
+            // Validación de la fecha
+            if (dia < 1 || dia > 31) {
+                alert("Error con los días");
+                diaInput.focus();
+                return;
+            }
+
+            if (mes < 1 || mes > 12) {
+                alert("Error con los meses");
+                mesInput.focus();
+                return;
+            }
+
+            if (año < 1900) {
+                alert("Error, el año es menor a 1900");
+                añoInput.focus();
+                return;
+            }
+            let fechaHoy = new Date();
+            if (año > fechaHoy.getFullYear()) {
+                alert("Error, la fecha es mayor a la del sistema");
+                return;
+            }
+            // CALCULAR LA EDAD
+            let edad = fechaHoy.getFullYear() - año;
+
+            if (fechaHoy.getMonth() + 1 < mes || (fechaHoy.getMonth() + 1 === mes && fechaHoy.getDate() < dia)) {
+                edad--;
+            }
+
+            if (edad < 14 || edad > 80) {
+                alert("ERROR, la fecha debe de estar entre los 14 y 80 años");
+                return;
+            }
+
+            document.getElementById("edad").value = edad;
+
+            let cantidad = tarifa;
+
+            if (empadronado === "si") {
+                cantidad *= 0.5;
+            } else {
+                if (edad < 18)
+                    cantidad *= 0.8;
+                if (edad > 65)
+                    cantidad *= 0.7;
+                if (familiaNumerosa === "si")
+                    cantidad -= 5;
+            }
+
+            document.getElementById("precio").value = cantidad;
+
+            document.getElementById("id33").style="display:block";
+
+
+        }
+
+        function marcar(td, valor) {
+            tarifa = valor;
+            todas = document.getElementsByTagName("td");
+            for (i = 0; i < todas.length; i++) {
+                todas[i].style.backgroundColor = "white";
+            }
+            td.style.backgroundColor = "green";
+        }
+
+        function cambiar(evento, campo) {
+            if (evento.type === "mouseover") {
+                campo.style.fontWeight = "bold";
+                campo.style.backgroundColor = "#81DAF5";
+            } else if (evento.type === "mouseout") {
+                campo.style.fontWeight = "normal";
+                campo.style.backgroundColor = "#FAFAFA";
+            }
+        }
+
+        function enviarDatos(){
+            const regex = /^[a-mA-M]*\d{2,}[a-mA-M]*$/;
+            const codigo = document.getElementById("val1");
+            if (codigo.value.match(regex)){
+                let c=window.confirm("Seguro??");
+                if (c){
+                    let mia=window.open("","_blank","width=300,height=200,top=200,left=300",5000);  
+                    mia.document.write("<p>Nos pondremos en contacto contigo</p>");
+                    window.setTimeout(function() {mia.close()},5000)
+                }
+            }
+        
+            const regex2 = /[a-zA-Z]{1}\.[0-9]{1}/;
+            const codigo2 = document.getElementById("val2");
+            if (codigo2.value.match(regex2)){
+                let c=window.confirm("Seguro??");
+                if (c){
+                    let mia=window.open("","_blank","width=300,height=200,top=200,left=300");  
+                    mia.document.write("<p>Nos pondremos en contacto contigo</p>");
+                    window.setTimeout(function() {mia.close()},5000)
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>POLIDEPORTIVO LEGANES SPORT</h1>
+    <div id="central">
+        <fieldset id="pos1">
+            Calculamos el precio mensual de tu carnet como socio en nuestro polideportivo.
+            Indica tu fecha de nacimiento y el uso que harías de él.
+        </fieldset>
+    </div>
+    <br>
+    <div id="abajo">
+        <form name="form1">
+            <label>Fecha nacimiento</label>
+            <input type="text" id="dd" placeholder="dd" style='text-align:center;' size=3>
+            <input type="text" id="mm" placeholder="mm" style='text-align:center;' size=3>
+            <input type="text" id="aaaa" placeholder="aaaa" style='text-align:center;' size=5>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp EDAD
+            <input type="text" id="edad" size=3 readonly>
+
+            <!--CHECKED PARA QUE EMPIECE EN NO Y HAY QUE DARLE UN NOMBRE A CADA UNO PARA
+            PODER ELEGIR ENTRE SI Y NO-->
+            <label>Empadronado en Leganés:</label><br>
+            <input type="radio" name="empadronado" value="si"> Sí
+            <input type="radio" name="empadronado" value="no" checked> No
+            <br><br>
+
+            <label>Familia numerosa:</label><br>
+            <input type="radio" name="familiaNumerosa" value="si"> Sí
+            <input type="radio" name="familiaNumerosa" value="no" checked> No
+            <br><br>
+
+            <label>TARIFAS:Clica la que te interesa</label>
+            <table>
+                <tr>
+                    <td onclick="marcar(this,20)" id="uno">1 hora semanal de L a V <b>20€</b></td>
+                    <td onclick="marcar(this,30)" id="dos">2 horas semanales de L a V <b>30€</b></td>
+                    <td onclick="marcar(this,40)" id="tres">4 horas semanales de L a V <b>40€</b></td>
+                    <td onclick="marcar(this,30)" id="cuatro">Fines de Semana <b>30€</b></td>
+                    <td onclick="marcar(this,60)" id="cinco">Entrada libre todos los días <b>60€</b></td>
+                </tr>
+            </table>
+
+            <hr>
+            <label>Descuentos:</label>
+            Menores de 18 años: 20%
+            <br>Mayores de 65 años: 30%
+            <br>Familia numerosa: 5€
+            <br>Empadronado en Leganés: 50% (este descuento anula los anteriores)
+            <br><br>
+
+            <input type="button" value="CALCULAR PRECIO" onclick="calcularprecio()">
+            <input type="text" id="precio" size=2 readonly>
+        </form>
+    </div>
+    <div id="id33" style="display:block">
+        <form name="form2">
+            <label>Teléfono</label>
+            <input type="text" id="telefono" size=20 onmouseover="cambiar(event,this)" onmouseout="cambiar(event,this)">
+            <br>No soy una máquina (Teclea un texto de entre 6 y 8 caracteres con al menos 2 números seguidos y el resto
+            letras de la A a la M)
+            <input type="text" id="val1" size=20 onmouseover="cambiar(event,this)" onmouseout="cambiar(event,this)">
+            <br>Vale, el anterior no me sale, pero no soy una máquina (Teclea una secuencia de letra.número al menos 2
+            veces L.9L.9 )
+            <input type="text" id="val2" size=20 onmouseover="cambiar(event,this)" onmouseout="cambiar(event,this)" >
+            <br> <input type="button" value="ENVIAR DATOS" onclick="enviarDatos()">
+        </form>
+    </div>
+</body>
+</html>
+
+EX 01.html
+Se ha reducido el elemento. 
