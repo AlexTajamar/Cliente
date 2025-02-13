@@ -46,7 +46,7 @@
 
         // Generar números en la tabla
         $("td").each(function () {
-          $(this).text(aleatorio(1, 9));
+          $(this).text(aleatorio(1, 9)); //me deja un numero,string el text
         });
 
         // Variable para la suma
@@ -60,7 +60,7 @@
           }
 
           // Sumar el número
-          const numero = parseInt($(this).text());
+          const numero = parseInt($(this).text()); //Convierte el string DEL VALOR DE LA CELDA a numero
           sumaTotal += numero;
 
           // Actualizar suma mostrada
