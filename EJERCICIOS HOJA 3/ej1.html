@@ -60,6 +60,23 @@
             $(this).one(alert('Solo te puedo hacer click una vez'));
         });
 
+        $("p").on("click", function () {
+            $(this).css('background-color', '#85C1E9',);
+            (this).css('font-size', '+=5px');
+
+        });
+
+        $('#otromas').on('click', function () {
+            $("p").off('click');
+            $('#div:first').off('mouseleave');
+            $('#div:first').off('mouseenter');
+
+        });
+
+        $('#texto').on('keyup', function () {
+            $('#mensaje').text('Dime algo bonito: ' + $(this).val());
+        });
+
     });
 </script>
 
