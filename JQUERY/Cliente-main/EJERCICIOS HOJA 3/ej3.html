@@ -1,0 +1,126 @@
+<html>
+<head>
+<style type='text/css'>
+		
+	body{
+		font-family: Georgia, "Times New Roman", Times, serif;
+	}
+	#div{
+	width:600px;
+	height:500px;
+	margin-left:20px;
+	border: 2px black solid;
+	padding: 20px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	background-color:99ccff;
+	}
+		
+		h1{
+			text-align:center;
+			font-size:20pt;
+		}
+		
+		table{
+			background-color: #EFF2FB;
+			text-align:center;
+			border: 1px solid #D0A9F5;
+			font-family: 'Cherry Swash', cursive;
+		}
+			
+		td{
+			border: 1px solid #D0A9F5;
+			width:30px;
+		}
+
+		</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"> </script>
+<script type="text/javascript">
+ 
+</script>
+<script>
+    $(document).ready(function() {
+        let arrayLetras = []; // Array para guardar las letras
+        
+        // Manejar tecleo en el campo oculto
+        $("#oculta").keypress(function(evento) {
+            // Si es la tecla ENTER (código 13)
+            if (evento.keyCode === 13) {
+                // Proteger el campo y dejarlo vacío
+                $(this).attr("disabled", true);
+                $(this).val("");
+                // Mostrar el div oculto
+                $("#oculto").show();
+                return false;
+            }
+            
+            // Si es la tecla de retroceso (código 8)
+            if (evento.keyCode === 8) {
+                // Borrar la última letra del array
+                arrayLetras.pop();
+                // Borrar la última celda de la tabla
+                $("tr td:last").remove();
+                return false;
+            }
+            
+            // Para cualquier otra tecla
+            if (evento.charCode) {
+                let letra = String.fromCharCode(evento.charCode);
+                // Guardar la letra en el array
+                arrayLetras.push(letra);
+                
+                // Añadir celda a la tabla
+                if (letra === " ") {
+                    $("tr").append("<td>&nbsp;</td>");
+                } else {
+                    $("tr").append("<td>*</td>");
+                }
+            }
+        });
+        
+        // Manejar el campo para adivinar letras
+        $("#texto").keypress(function(evento) {
+            if (evento.charCode) {
+                let letraIntento = String.fromCharCode(evento.charCode);
+                let encontrada = false;
+                
+                // Comprobar si la letra existe en el array
+                for(let i = 0; i < arrayLetras.length; i++) {
+                    if (arrayLetras[i].toLowerCase() === letraIntento.toLowerCase()) {
+                        encontrada = true;
+                        // Mostrar la letra en la posición correspondiente
+                        $("tr td").eq(i).text(arrayLetras[i]);
+                    }
+                }
+                
+                // Si no se encontró, incrementar fallos
+                if (!encontrada) {
+                    let fallos = parseInt($("#fallos").val()) + 1;
+                    $("#fallos").val(fallos);
+                }
+                
+                // Limpiar el campo después de cada intento
+                setTimeout(() => {
+                    $(this).val("");
+                }, 100);
+            }
+        });
+    });
+</script>
+</head>
+<body>
+<div id="div">
+<br><br>
+ESCRIBE LO QUE QUIERAS <input type="password" id="oculta"  size=30  >
+<br><br>
+<table>
+<tr></tr>
+</table>
+<div id="oculto" style="display:none">
+<br><br>
+TECLEA LETRAS <input type="text" id="texto"  size=3>
+<br><br>
+FALLOS <input type="text" id="fallos"  size=3 value=0 disabled>
+</div>
+</div> 
+</html>
