@@ -1,58 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="main.css">
-<style>
-#container {
-		position:relative;
-		margin:auto;
-		width:800px;
-		}
-#id1 {
-		position:absolute;
-		left:20px;
-		top:50px;
-		}
-#id2 {
-		position:absolute;
-		left:250px;
-		top:50px;
-		}
-#id3 {
-		position:absolute;
-		left:450px;
-		top:50px;
-		}
-</style>
-</head>
-<body>
-<div id="#container">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      #container {
+        position: relative;
+        margin: auto;
+        width: 800px;
+      }
+      #id1 {
+        position: absolute;
+        left: 20px;
+        top: 50px;
+      }
+      #id2 {
+        position: absolute;
+        left: 250px;
+        top: 50px;
+      }
+      #id3 {
+        position: absolute;
+        left: 450px;
+        top: 50px;
+      }
 
-<div id="id1">
-<h3> CONTESTA </h3>
-¿De que color era el caballo <br> blanco de Santiago?
-<br><br><input type="radio" name="p1" value="1"> Negro  
-<br><input type="radio" name="p1" value="2"> Blanco 
-<br><input type="radio" name="p1" value="3"> Marrón 
-<input type="text" style="display:none" value="2">
-</div>
-<div id="id2">
-<h3> CONTESTA </h3>
-¿Cuantas patas tiene una  <br> araña ?
-<br><br><input type="radio" name="p2" value="1"> Cuatro  
-<br><input type="radio" name="p2" value="2"> Seis 
-<br><input type="radio" name="p2" value="3"> Ocho 
-<input type="text" style="display:none" value="3">
-</div>
-<div id="id3">
-<h3> CONTESTA </h3>
-¿A quién quieres más, a papá, <br> a mamá o al ay ay ay?
-<br><br><input type="radio" name="p3" value="1"> Papá  
-<br><input type="radio" name="p3" value="2"> Mamá 
-<br><input type="radio" name="p3" value="3"> Ay ay ay
-<input type="text" style="display:none" value="3">
-</div>
-</div>
-</body>
+      /* Estilos para los resultados */
+      .correcto {
+        color: green;
+        font-weight: bold;
+      }
+      .incorrecto {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="#container">
+      <div id="id1">
+        <h3>CONTESTA</h3>
+        ¿De que color era el caballo <br />
+        blanco de Santiago? <br /><br /><input
+          type="radio"
+          name="p1"
+          value="1"
+        />
+        Negro <br /><input type="radio" name="p1" value="2" /> Blanco
+        <br /><input type="radio" name="p1" value="3" /> Marrón
+        <input type="text" style="display: none" value="2" />
+      </div>
+      <div id="id2">
+        <h3>CONTESTA</h3>
+        ¿Cuantas patas tiene una <br />
+        araña ? <br /><br /><input type="radio" name="p2" value="1" /> Cuatro
+        <br /><input type="radio" name="p2" value="2" /> Seis <br /><input
+          type="radio"
+          name="p2"
+          value="3"
+        />
+        Ocho
+        <input type="text" style="display: none" value="3" />
+      </div>
+      <div id="id3">
+        <h3>CONTESTA</h3>
+        ¿A quién quieres más, a papá, <br />
+        a mamá o al ay ay ay? <br /><br /><input
+          type="radio"
+          name="p3"
+          value="1"
+        />
+        Papá <br /><input type="radio" name="p3" value="2" /> Mamá <br /><input
+          type="radio"
+          name="p3"
+          value="3"
+        />
+        Ay ay ay
+        <input type="text" style="display: none" value="3" />
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Manejar el cambio en cualquier radio button
+        $('input[type="radio"]').change(function () {
+          // Obtener el div contenedor de la pregunta actual
+          var divPregunta = $(this).closest("div");
+
+          // Obtener el valor correcto almacenado en el input oculto
+          var respuestaCorrecta = divPregunta.find('input[type="text"]').val();
+
+          // Obtener el valor seleccionado
+          var respuestaSeleccionada = $(this).val();
+
+          // Obtener el elemento h3 para modificar el texto
+          var h3Element = divPregunta.find("h3");
+
+          // Comprobar si la respuesta es correcta
+          if (respuestaSeleccionada === respuestaCorrecta) {
+            h3Element.text("OK").removeClass("incorrecto").addClass("correcto");
+          } else {
+            h3Element
+              .text("ERROR")
+              .removeClass("correcto")
+              .addClass("incorrecto");
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

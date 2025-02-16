@@ -1,33 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-</script>
-<style>
-          #divAnimado,#divAnimado2, #divAnimado3{
-                    float: left;
-					width: 150px;
-                    height: 150px;
-                    margin-left: 50px;
-                    margin-top: 50px;
-                    background-color: #0000FF;
-          }
- 
-          #divAnimado2{background-color:red;}
- 
-          #divAnimado2{background-color:green;}
-</style>
- 
-</head>
- 
-<body>
-          <div id="divAnimado"></div>
- 
-          <div id="divAnimado2"></div>
- 
-          <div id="divAnimado3"></div>
-		  <input type="button" id="boton" value="Iniciar Animacion" />
+  <head>
+    <meta charset="UTF-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      #divAnimado,
+      #divAnimado2,
+      #divAnimado3 {
+        float: left;
+        width: 150px;
+        height: 150px;
+        margin-left: 50px;
+        margin-top: 50px;
+        background-color: #0000ff;
+        position: relative;
+      }
 
-</body>
+      #divAnimado2 {
+        background-color: red;
+      }
+
+      #divAnimado3 {
+        background-color: green;
+      }
+
+      #boton {
+        clear: both;
+        display: block;
+        margin-top: 250px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="divAnimado"></div>
+    <div id="divAnimado2"></div>
+    <div id="divAnimado3"></div>
+    <input type="button" id="boton" value="Iniciar Animacion" />
+
+    <script>
+      $(document).ready(function () {
+        $("#boton").click(function () {
+          // Primera animación: cajas azules hacia abajo y verde hacia la izquierda
+          $("#divAnimado, #divAnimado2").animate(
+            {
+              marginTop: "+=200",
+            },
+            1000
+          );
+
+          $("#divAnimado3").animate(
+            {
+              marginLeft: "-=200",
+            },
+            1000,
+            function () {
+              // Callback: cuando termina la primera animación
+              // Mover la caja verde hacia abajo
+              $("#divAnimado3").animate(
+                {
+                  marginTop: "+=200",
+                },
+                1000
+              );
+            }
+          );
+        });
+      });
+    </script>
+  </body>
 </html>

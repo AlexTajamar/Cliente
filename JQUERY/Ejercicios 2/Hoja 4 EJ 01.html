@@ -1,21 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>jQuery Drop Down Menu</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
-</script>
-<link rel="stylesheet" href="stilos 01.css" type="text/css" />  
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>jQuery Drop Down Menu</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+      /* Estilos básicos del menú */
+      #menu {
+        width: 200px;
+        margin: 20px;
+      }
 
-	<div id="menu">
-<ul>
-	<li><a id="item1" href="#">Inicio</a></li>
-	<li><a id="item2" href="#">Tutoriales</a></li>
-	<li><a id="item3" href="#">Ejemplos</a></li>
-</ul>
-</div>
+      #menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
 
-</body>
+      #menu li {
+        margin-bottom: 5px;
+      }
+
+      #menu a {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        background-color: #333;
+        color: white;
+        border-radius: 5px;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: all 0.3s ease;
+      }
+
+      /* Estilo para el hover */
+      #menu a:hover {
+        background-color: #666;
+        transform: scale(1.05);
+      }
+
+      /* Clases para la animación */
+      #menu a.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="menu">
+      <ul>
+        <li><a id="item1" href="#">Inicio</a></li>
+        <li><a id="item2" href="#">Tutoriales</a></li>
+        <li><a id="item3" href="#">Ejemplos</a></li>
+      </ul>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Función para mostrar los items progresivamente
+        function showItems() {
+          $("#menu a").each(function (index) {
+            var item = $(this);
+            setTimeout(function () {
+              item.addClass("visible");
+            }, index * 200); // Retraso de 200ms entre cada item
+          });
+        }
+
+        // Llamar a la función cuando el documento esté listo
+        showItems();
+      });
+    </script>
+  </body>
 </html>

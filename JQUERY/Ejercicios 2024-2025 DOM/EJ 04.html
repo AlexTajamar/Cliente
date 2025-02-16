@@ -1,27 +1,90 @@
-<html>
-<head>
-<title></title>
-<link rel="stylesheet" href="main.css">
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manipulaci√≥n del DOM con jQuery</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#boton1").click(function () {
+          $("ul").remove();
+        });
 
+        $("#boton2").click(function () {
+          if ($("ul").length === 0) {
+            $("body").append(
+              "<ul><li>Primer item.</li><li>Segundo item.</li><li>Tercer item.</li><li>Cuarto item.</li></ul>"
+            );
+          }
+        });
 
+        $("#boton3").click(function () {
+          $("ul").append("<li>Nuevo elemento al final</li>");
+        });
 
+        $("#boton4").click(function () {
+          $("ul").prepend("<li>Nuevo elemento al principio</li>");
+        });
 
-</head>
-<body>
-<h1>MÈtodos para manipular nodos del DOM con jQuery.</h1>
-<ul>
-<li>Primer item.</li>
-<li>Segundo item.</li>
-<li>Tercer item.</li>
-<li>Cuarto item.</li>
-</ul>
-<input type="button" id="boton1" value="Eliminar la lista completa."><br>
-<input type="button" id="boton2" value="Restaurar Lista"><br>
-<input type="button" id="boton3" value="AÒadir un elemento al final de la lista"><br>
-<input type="button" id="boton4" value="AÒadir un elemento al principio de la lista"><br>
-<input type="button" id="boton5" value="Eliminar el ˙ltimo elemento."><br>
-<input type="button" id="boton6" value="Eliminar el primer elemento."><br>
-<input type="button" id="boton7" value="Eliminar el primero y segundo elemento."><br>
-<input type="button" id="boton8" value="Eliminar los dos ˙ltimos."><br>
-</body>
+        $("#boton5").click(function () {
+          $("ul li:last").remove();
+        });
+
+        $("#boton6").click(function () {
+          $("ul li:first").remove();
+        });
+
+        $("#boton7").click(function () {
+          $("ul li:nth-child(1), ul li:nth-child(2)").remove();
+        });
+
+        $("#boton8").click(function () {
+          $("ul li:nth-last-child(1), ul li:nth-last-child(2)").remove();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>M√©todos para manipular nodos del DOM con jQuery.</h1>
+    <ul>
+      <li>Primer item.</li>
+      <li>Segundo item.</li>
+      <li>Tercer item.</li>
+      <li>Cuarto item.</li>
+    </ul>
+    <input
+      type="button"
+      id="boton1"
+      value="Eliminar la lista completa."
+    /><br />
+    <input type="button" id="boton2" value="Restaurar Lista" /><br />
+    <input
+      type="button"
+      id="boton3"
+      value="A√±adir un elemento al final de la lista"
+    /><br />
+    <input
+      type="button"
+      id="boton4"
+      value="A√±adir un elemento al principio de la lista"
+    /><br />
+    <input
+      type="button"
+      id="boton5"
+      value="Eliminar el √∫ltimo elemento."
+    /><br />
+    <input
+      type="button"
+      id="boton6"
+      value="Eliminar el primer elemento."
+    /><br />
+    <input
+      type="button"
+      id="boton7"
+      value="Eliminar el primero y segundo elemento."
+    /><br />
+    <input type="button" id="boton8" value="Eliminar los dos √∫ltimos." /><br />
+  </body>
 </html>

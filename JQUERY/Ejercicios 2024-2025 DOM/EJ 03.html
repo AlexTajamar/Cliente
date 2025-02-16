@@ -1,28 +1,75 @@
-<html>
-<head>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="estilos2.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Manejo de eventos para hover (mouseenter y mouseleave)
+        $(".campo").hover(
+          function () {
+            $(this).addClass("borde-resaltado");
+          },
+          function () {
+            $(this).removeClass("borde-resaltado");
+          }
+        );
 
-<link rel="StyleSheet" href="estilos3.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script></script>
+        // Manejo de eventos para focus y blur
+        $(".campo").on("focus", function () {
+          $(this).addClass("borde-resaltado fondo-resaltado");
+        });
 
-</head>
-<body>
-<div id="caja" class="myform">
-<form id="formulario" >
-<h1>Formulario De Registro</h1>
-<p>Prueba de addclass y removeclass</p>
+        $(".campo").on("blur", function () {
+          $(this).removeClass("borde-resaltado fondo-resaltado");
+        });
 
-<label>Nombre<span class="peque">Teclea nombre</span></label>
-<input type="text" name="nombre" id="nombre" class="campo"/>
+        // Validación del formulario
+        $("#formulario").on("submit", function (event) {
+          let password = $("#password");
+          if (password.val().length < 6) {
+            event.preventDefault(); // Evita que el formulario se envíe
+            password.addClass("error-password");
+          } else {
+            password.removeClass("error-password");
+          }
+        });
+      });
+    </script>
+    <style>
+      .borde-resaltado {
+        border: 3px solid blue;
+      }
 
-<label>Email<span class="peque">Teclea email</span></label>
-<input type="text" name="email" id="email" class="campo" />
+      .fondo-resaltado {
+        background-color: lightyellow;
+      }
 
-<label>Password<span class="peque">Min. size 6 chars</span></label>
-<input type="password" name="password" id="password" class="campo" />
+      .error-password {
+        border: 3px groove red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="caja" class="myform">
+      <form id="formulario">
+        <h1>Formulario De Registro</h1>
+        <p>Prueba de addClass y removeClass</p>
 
-<button type="submit">Registrar</button>
-</form>
-</div>
-</body>
+        <label>Nombre<span class="peque"> Teclea nombre</span></label>
+        <input type="text" name="nombre" id="nombre" class="campo" />
+
+        <label>Email<span class="peque"> Teclea email</span></label>
+        <input type="text" name="email" id="email" class="campo" />
+
+        <label>Password<span class="peque"> Min. size 6 chars</span></label>
+        <input type="password" name="password" id="password" class="campo" />
+
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+  </body>
 </html>

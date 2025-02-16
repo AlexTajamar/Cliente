@@ -1,61 +1,94 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="main.css">
-<style>
-#container {
-		position:relative;
-		margin:auto;
-		width:800px;
-		}
-#id1 {
-		position:absolute;
-		left:20px;
-		top:50px;
-		}
-#id2 {
-		position:absolute;
-		left:200px;
-		top:50px;
-		}
-#id3 {
-		position:absolute;
-		left:350px;
-		top:50px;
-		}
-</style>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      #container {
+        position: relative;
+        margin: auto;
+        width: 800px;
+      }
 
-</head>
-<body>
-<div id="#container">
+      #id1 {
+        position: absolute;
+        left: 20px;
+        top: 50px;
+      }
 
-<div id="id1"> 
-<ul>
-<li> Naranjas </li>
-<li> Limones </li>
-<li> Peras </li>
-<li> Manzanas </li>
-<li> Plátanos </li>
-</ul>
-</div>
-<div id="id2">
-<ul>
-<li> Queso </li>
-<li> Salchichón </li>
-<li> Jamón </li>
-</ul>
-</div>
-<div id="id3">
-<ul>
-<li> Tomate </li>
-<li> Cebolla </li>
-<li> Lechuga </li>
-<li> Pepino </li>
-<li> Ajo </li>
-</ul>
-</div>
-</div>
-</body>
+      #id2 {
+        position: absolute;
+        left: 200px;
+        top: 50px;
+      }
 
+      #id3 {
+        position: absolute;
+        left: 350px;
+        top: 50px;
+      }
+
+      /* Estilos para los estados de los elementos */
+      .borde-gris {
+        border: 2px solid #999;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      li {
+        cursor: pointer;
+        padding: 5px;
+        transition: color 0.3s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="id1">
+        <ul>
+          <li>Naranjas</li>
+          <li>Limones</li>
+          <li>Peras</li>
+          <li>Manzanas</li>
+          <li>Plátanos</li>
+        </ul>
+      </div>
+      <div id="id2">
+        <ul>
+          <li>Queso</li>
+          <li>Salchichón</li>
+          <li>Jamón</li>
+        </ul>
+      </div>
+      <div id="id3">
+        <ul>
+          <li>Tomate</li>
+          <li>Cebolla</li>
+          <li>Lechuga</li>
+          <li>Pepino</li>
+          <li>Ajo</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $("li").click(function () {
+          // 1. Resetear todos los elementos a negro y quitar bordes grises
+          $("li").css("color", "black");
+          $("div").removeClass("borde-gris");
+
+          // 2. Colorear el elemento clicado en azul
+          $(this).css("color", "blue");
+
+          // 3. Colorear elementos anterior y posterior en verde
+          $(this).prev().css("color", "green");
+          $(this).next().css("color", "green");
+
+          // 4. Añadir borde gris al div contenedor
+          $(this).closest("div").addClass("borde-gris");
+        });
+      });
+    </script>
+  </body>
 </html>
